@@ -2,64 +2,44 @@
 #include <locale.h>
 #include <math.h>
 using namespace std;
+
 int main(void) {
-	int a, b, c, a2, b2, c2;
-	int err, err2;
-	int u1, u2, u3;
-	float ac, bc, cc, a1, b1, c1;
+
+	int a, b, c, err;
+	float ac, bc, cc;
+
 	setlocale (LC_ALL, "Russian");
+
 	cout << "Введите 3 целых числа: " << endl;
-	err = scanf_s("%d %d %d", &a, &b, &c);
-	if (err != 3) {
+	err = scanf_s("%d %d %d", &a, &b, &c);          // Ввод 3-х целых чисел.
+	if (err != 3) {                                    // Проверка введенных данных.
 		cout << "Введенные данные неверны." << endl;
 		return 1;
 	}
-	if (a + b > c)
-		u1 = 1;
-	else u1 = 0;
-	if (a + c > b)
-		u2 = 1;
-	else u2 = 0;
-	if (b + c > a)
-		u3 = 1;
-	else u3 = 0;
-	if (u1 == u2)
-		if (u2 == u3)
-			err2 = 1;
-		else err2 = 0;
-	else err2 = 0;
-	if (err2 == 1){
-		b2 = pow(b, 2);
-		a2 = pow(a, 2);
-		c2 = pow(c, 2);
 
-		ac = b2 + c2 - a2;
-		a1 = 2 * b * c;
-		ac = ac / a1;
+	if ((a + b > c) && (a + c > b) && (b + c > a)) {      // Проверка - существует ли такой треугольник?
+		
+		ac = (pow(b, 2) + pow(c, 2) - pow(a, 2)) / (2 * b * c);   // Вычисление косинуса угла напротив стороны а
 
-		bc = a2 + c2 - b2;
-		b1 = 2 * a * c;
-		bc = bc / b1;
+		bc = (pow(a, 2) + pow(c, 2) - pow(b, 2)) / (2 * a * c);   // Вычисление косинуса угла напротив стороны b
 
-		cc = b2 + a2 - c2;
-		c1 = 2 * b * a;
-		cc = cc / c1;
+		cc = (pow(b, 2) + pow(a, 2) - pow(c, 2)) / (2 * b * a);   // Вычисление косинуса угла напротив стороны c
 
-		if ((cc == 0) || (ac == 0) || (bc == 0)) {
+		if ((cc == 0) || (ac == 0) || (bc == 0)) {                // Проверка - является ли треугольник прямоугольным?
 			cout << "Треугольник прямоугольный" << endl;
 			return 0;
 		}
-		else if ((cc < 0) || (ac < 0) || (bc < 0)) {
+		else if ((cc < 0) || (ac < 0) || (bc < 0)) {        // Проверка - если треуг. не прямоугольный, то может тупоугольный?
 				cout << "Треугольник тупоугольный" << endl;
 				return 0;
 			 }
 			 else {
-				 cout << "Треугольник остроугольный" << endl;
+				 cout << "Треугольник остроугольный" << endl; // Иначе(если не прямоуг. и не тупоуг.) он остроугольный
 				 return 0;
 			 }
 				
 	}
-	else {
+	else {                                             // Иначе, если такого треугольника нет. (строка условия - 20)
 		cout << "Треугольник не существует" << endl;
 		return 0;
 	}
