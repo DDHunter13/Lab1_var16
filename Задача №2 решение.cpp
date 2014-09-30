@@ -5,7 +5,7 @@ using namespace std;
 
 int main(void) {
 
-	int a, b, c, err, k;
+	int a, b, c, err;
 	float ac, bc, cc;
 
 	setlocale (LC_ALL, "Russian");
@@ -18,14 +18,10 @@ int main(void) {
 	}
 	
 	if (a > b) {  // находим максимум среди чисел a и b 
-		k = a;
-		a = b;
-		b = k;
+		swap (a, b);
 	}
 	if (b > c) {  // Находим максимум среди чисел b и c
-		k = b;
-		b = c;
-		c = k;
+		swap (b, c);
 	}				// в результате максимальнаое из трех чисел записано в переменную c
 
 	if (a + b > c) {      // Проверка - существует ли такой треугольник?
